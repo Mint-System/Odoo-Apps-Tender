@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -15,17 +15,17 @@ class PortfolioGoalTask(models.Model):
 
     name = fields.Char(string="Name", required=True, translate=True, tracking=True)
     active = fields.Boolean(default=True, tracking=True)
-    user_id = fields.Many2one(
-        "res.users", string="Responsible",
-        domain="[('share', '=', False)]", tracking=True
-    )
+    user_id = fields.Many2one("res.users", string="Responsible", domain="[('share', '=', False)]", tracking=True)
     currency_id = fields.Many2one("res.currency", string="Currency")
     value = fields.Monetary(string="Value", tracking=True)
     sequence = fields.Integer(string="Sequence")
     stage_id = fields.Many2one(
-        "portfolio.goal_task_stage", string="Stage",
-        required=True, tracking=True,
-        group_expand="_group_expand_stages", ondelete="restrict"
+        "portfolio.goal_task_stage",
+        string="Stage",
+        required=True,
+        tracking=True,
+        group_expand="_group_expand_stages",
+        ondelete="restrict",
     )
     priority = fields.Boolean(string="High Priority")
     color = fields.Integer(string="Color")
@@ -39,21 +39,13 @@ class PortfolioGoalTask(models.Model):
         default="normal",
     )
     tag_ids = fields.Many2many(
-        "portfolio.goal_task_tag", string="Tags",
-        relation="portfolio_goal_task_tag_rel", tracking=True
+        "portfolio.goal_task_tag", string="Tags", relation="portfolio_goal_task_tag_rel", tracking=True
     )
-    solution_id = fields.Many2one(
-        "portfolio.solution", string="Solution", tracking=True
-    )
+    solution_id = fields.Many2one("portfolio.solution", string="Solution", tracking=True)
     start_date = fields.Date(string="Time Period", tracking=True)
     due_date = fields.Date(string="Due Date", tracking=True)
     period = fields.Date(string="Periode")
-    type = fields.Selection(
-        [("goal", "Goal"), ("task", "Key Task")],
-        string="Type",
-        default="goal",
-        tracking=True
-    )
+    type = fields.Selection([("goal", "Goal"), ("task", "Key Task")], string="Type", default="goal", tracking=True)
     indicator = fields.Selection(
         [
             ("Qualitative", "Qualitative"),
@@ -63,7 +55,7 @@ class PortfolioGoalTask(models.Model):
             ("Other", "Other"),
         ],
         string="Indicator",
-        tracking=True
+        tracking=True,
     )
     commit_text = fields.Text(string="Commit (Text)", tracking=True)
     target_text = fields.Text(string="Target (Text)", tracking=True)

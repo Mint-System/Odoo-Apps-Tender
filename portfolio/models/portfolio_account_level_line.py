@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -12,8 +12,6 @@ class PortfolioAccountLevelLine(models.Model):
     _description = "Account Level Line"
     _order = "sequence, id"
 
-    account_level_id = fields.Many2one(
-        "portfolio.account_level", string="Account Level", required=True
-    )
+    account_level_id = fields.Many2one("portfolio.account_level", string="Account Level", required=True)
     sequence = fields.Integer(string="Sequence")
     name = fields.Char(string="Description", required=True, translate=True)

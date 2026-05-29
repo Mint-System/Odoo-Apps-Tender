@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -48,8 +48,7 @@ class ReferenceReference(models.Model):
     )
     short_reference = fields.Html(
         string="Short reference",
-        help="Teaser & short reference text with 2 - 3 core statements and formulated "
-        "as VP (< 200 chars incl. spaces)",
+        help="Teaser & short reference text with 2 - 3 core statements and formulated as VP (< 200 chars incl. spaces)",
     )
     industries = fields.Many2many("res.partner.industry", string="Industries")
     project_start = fields.Date(string="Duration from", tracking=True)
@@ -76,8 +75,7 @@ class ReferenceReference(models.Model):
     )
     sales_reference = fields.Html(
         string="Sales Reference",
-        help="Keywords or prose divided into important topics. "
-        "No longer than 1500 characters, short sentences.",
+        help="Keywords or prose divided into important topics. No longer than 1500 characters, short sentences.",
     )
     used_for_opportunities = fields.Many2many(
         "crm.lead",

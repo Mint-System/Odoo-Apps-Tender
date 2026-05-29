@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -16,7 +16,4 @@ class PortfolioAccountLevel(models.Model):
     active = fields.Boolean(default=True)
     sequence = fields.Integer(string="Sequence")
     description = fields.Char(string="Account Level Description")
-    line_ids = fields.One2many(
-        "portfolio.account_level_line", "account_level_id",
-        string="Lines"
-    )
+    line_ids = fields.One2many("portfolio.account_level_line", "account_level_id", string="Lines")

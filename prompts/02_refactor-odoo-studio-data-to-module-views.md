@@ -19,7 +19,8 @@ Read the `AGENTS.md` and `README.md` to get an understanding of the project.
 
 ## Task
 
-In the last session you have completed the prompt `addons/tender/prompts/01_refactor-odoo-studio-app-to-module-models.md`.
+In the last session you have completed the prompt
+`addons/tender/prompts/01_refactor-odoo-studio-app-to-module-models.md`.
 
 Now I would like to create the following module resources:
 
@@ -32,13 +33,16 @@ The relevant data is in:
 - `ir_ui_view.xml`
 - `ir_ui_menu.xml`
 
-Start by creating the access rules for each model. Use `task generate-module-security addons/tender/reference reference.reference` generate the rules.
+Start by creating the access rules for each model. Use
+`task generate-module-security addons/tender/reference reference.reference` generate the
+rules.
 
-Then create default views for each model with `task generate-module-views addons/tender/reference reference.reference`. Update the view definitions according to the definitions of the Studio apps.
+Then create default views for each model with
+`task generate-module-views addons/tender/reference reference.reference`. Update the
+view definitions according to the definitions of the Studio apps.
 
-While re-creating the views keep in mind that all field names have been mapped to new names `FIELD_MAPPING.md`.
-
-
+While re-creating the views keep in mind that all field names have been mapped to new
+names `FIELD_MAPPING.md`.
 
 ## Worklog
 

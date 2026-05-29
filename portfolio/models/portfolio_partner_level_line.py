@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -12,8 +12,6 @@ class PortfolioPartnerLevelLine(models.Model):
     _description = "Partner Level Line"
     _order = "sequence, id"
 
-    partner_level_id = fields.Many2one(
-        "portfolio.partner_level", string="Partner Level", required=True
-    )
+    partner_level_id = fields.Many2one("portfolio.partner_level", string="Partner Level", required=True)
     sequence = fields.Integer(string="Sequence")
     name = fields.Char(string="Description", required=True, translate=True)
