@@ -41,7 +41,7 @@ Then create default views for each model with
 `task generate-module-views addons/tender/reference reference.reference`. Update the
 view definitions according to the definitions of the Studio apps.
 
-Note that the new views should not have an xml edits. Xml edit can be identified by the `position` attribute. Try to reconstruct the final views.
+Note that the new views must not have any xml edits. Xml edit can be identified by the `position` attribute. Try to reconstruct the final views.
 
 While re-creating the views keep in mind that all field names have been mapped to new
 names `FIELD_MAPPING.md`.
