@@ -30,17 +30,19 @@ The export data is stored here: `~/Downloads/customizations/studio_customization
 
 I want you to start with an analysis of the files and answer the following questions:
 
-1. What does the menü structure of "Referenes" look like? Show the hierarchy.
+1. What does the menu structure of "Referenes" look like? Show the hierarchy.
 2. What models and fields are shown in "Referenes" apps?
 3. Which fields are actually shown in the views of the "References" app?
 
-Once you have answered these questions. I want you to setup the python models of the `reference` module. Use this task to create the files:
+Once you have answered these questions. I want you to setup the python models of the `reference` module. Use this task command to create the files:
 
 ```bash
 task generate-module-model addons/tender/reference reference.reference
 ```
 
 Create all models and fields. The fields have to be added manually.
+
+Once you have done this, I want you to rename all fields. They should not have an `x_` or `x_studio` or any generated name. Make educated guess for new names and create a mapping table form Studio field names to the new names.
 
 Do not create menus and view yet. This will be asked of you in another session.
 
