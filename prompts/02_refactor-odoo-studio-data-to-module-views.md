@@ -1,6 +1,6 @@
 ---
 title: "Refactor Odoo studio data to module views"
-state: draft
+state: ready
 ---
 
 # Run 02

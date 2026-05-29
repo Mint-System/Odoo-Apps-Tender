@@ -1,5 +1,6 @@
 ---
 title: "Refactor Odoo studio app to module models"
+state: completed
 ---
 
 # Run 01
