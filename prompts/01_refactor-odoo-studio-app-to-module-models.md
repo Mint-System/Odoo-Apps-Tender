@@ -82,14 +82,18 @@ References (fa fa-newspaper-o, #0079BF)
     └── Stages
 ```
 
-**2. Models Created (8 models total):** | Studio Model | New Module Model | Description
-| |---|---|---| | `x_references` | `reference.reference` | Main References model | |
-`x_references_stage` | `reference.stage` | Reference Stages | | `x_website_tags` |
-`reference.website_tag` | Website Tags | | `x_technologies` | `reference.technology` |
-Technologies, Tools & Methods | | `x_service_types` | `reference.service_type` | Service
-Types | | `x_reference_channels` | `reference.channel` | Reference Channels | |
-`x_reference_tags` | `reference.tag` | Reference Tags | | `x_target_group` |
-`reference.target_group` | Target Group/Persona |
+**2. Models Created (8 models total):**
+
+| Studio Model | New Module Model | Description |
+|---|---|---|
+| `x_references` | `reference.reference` | Main References model |
+| `x_references_stage` | `reference.stage` | Reference Stages |
+| `x_website_tags` | `reference.website_tag` | Website Tags |
+| `x_technologies` | `reference.technology` | Technologies, Tools & Methods |
+| `x_service_types` | `reference.service_type` | Service Types |
+| `x_reference_channels` | `reference.channel` | Reference Channels |
+| `x_reference_tags` | `reference.tag` | Reference Tags |
+| `x_target_group` | `reference.target_group` | Target Group/Persona |
 
 **3. Fields in `reference.reference` (32 fields):**
 
