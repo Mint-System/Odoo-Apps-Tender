@@ -20,7 +20,7 @@ Read the `AGENTS.md` and `README.md` to get an understanding of the project.
 
 You are working in the context of an Odoo repo `addons/tender`. This repos has been initialized with an Odoo module `addons/tender/reference`. This app has been implemented using Odoo Studio. Your goal is to create an actual module from the Odoo studio export data.
 
-The export data is stored here: `~/Downloads/customizations/studio_customization/data`. In there you find these files:
+The export data is stored here: `/home/janikvonrotz/Downloads/customizations/studio_customization/data`. In there you find these files:
 
 - `ir_ui_view.xml`: Containts all the view definitions of the apps
 - `ir_ui_menu.xml`: Menü structure of the apps. This can give you an idea what the "References" app looks like. The main menu entry has a `web_icon` attribute.
