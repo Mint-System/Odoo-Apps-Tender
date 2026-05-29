@@ -1,9 +1,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Reference",
+    "name": "Portfolio",
     "summary": """
-        Manage references for tender applications.
+        Manage portfolio for tender applications.
     """,
     "author": "Mint System GmbH",
     "website": "https://www.mint-system.ch/",
@@ -11,7 +11,7 @@
     "development_status": "Production/Stable",
     "version": "19.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["mail", "crm"],
+    "depends": ["product", "mail", "reference"],
     "data": [],
     "installable": True,
     "application": False,

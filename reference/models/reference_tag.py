@@ -1,0 +1,15 @@
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+import logging
+
+from odoo import _, api, fields, models
+
+_logger = logging.getLogger(__name__)
+
+
+class ReferenceTag(models.Model):
+    _name = "reference.tag"
+    _description = "Reference Tag"
+
+    name = fields.Char(string="Name", required=True, translate=True)
+    active = fields.Boolean(default=True)
