@@ -24,7 +24,7 @@ initialized with an Odoo module `addons/tender/reference`.
 
 There is Odoo Studio app with the name "References". The export all Studio
 customisations are stored here
-`$HOME/Downloads/customizations/studio_customization/data`.
+`$HOME/Odoo-Build/tmp/customizations/studio_customization/data`.
 
 Your goal is to create an actual module from the Odoo studio export.
 
