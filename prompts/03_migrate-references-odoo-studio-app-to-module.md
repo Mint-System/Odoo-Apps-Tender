@@ -1,6 +1,6 @@
 ---
 title: "Migrate References Odoo Studio app to module"
-state: draft
+state: completed
 ---
 
 # Run 03
@@ -92,7 +92,6 @@ have already created an example.
 
 Update the view definitions according to the definitions of the Studio app.
 
-
 When naming `group` tags, give a fitting name and not the generic Studio name.
 
 Note that the new views must not have any xml edits. Xml edit can be identified by the
@@ -104,6 +103,28 @@ Run `task lint` in `addons/tender`. I will start the Odoo db and install the mod
 
 ## Worklog
 
-@Clanker Add a summary here once the task has been completed.
-
-@Clanker Set frontmatter state to completed.
+- Analysed the Studio export located in
+  `~/Downloads/customizations/studio_customization/data`.
+- Identified the "References" app menu hierarchy, models (`x_references`,
+  `x_references_stage`, `x_website_tags`, `x_technologies`, `x_service_types`,
+  `x_reference_channels`, `x_reference_tags`, `x_target_group`), and all fields.
+- Reconstructed the final views from Studio's default + xpath customisations (removed
+  all xml edits).
+- Renamed all models and fields from `x_studio_*` / `x_*` to clean, meaningful names
+  (e.g. `reference.reference`, `stage_id`, `customer_id`, `usage_type`).
+- Created `FIELD_MAPPING.md` documenting the mapping for future data migration.
+- Generated model skeletons and populated them with the correct fields; added mail
+  thread/activity mixins where needed.
+- Generated access rules for all models using `task generate-module-security`.
+- Created menus matching the original hierarchy (root "References" with web icon,
+  sub-menus incl. Configuration).
+- Created list, form, kanban, and search views for `reference.reference` and all
+  supporting models.
+- Renamed all generic `studio_group_*` names to meaningful group names.
+- Fixed XML ordering: moved `reference_reference_search_view` before the actions that
+  reference it to avoid forward-reference errors during module installation.
+- Added demo data in `demo/demo.xml` with a sample reference record, partners,
+  industries, technologies, website tags, and service types.
+- Added a default kanban stage "New" in `data/reference_stage_data.xml` and wired it as
+  the default `stage_id` on `reference.reference` via `_default_stage_id()`.
+- Ran `task lint` successfully (all pre-commit hooks passed).

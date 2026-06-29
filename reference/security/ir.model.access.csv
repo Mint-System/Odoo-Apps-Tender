@@ -1,3 +1,17 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_reference_reference_user,access.reference.reference.user,model_reference_reference,base.group_user,1,0,0,0
 access_reference_reference_manager,access.reference.reference.manager,model_reference_reference,base.group_erp_manager,1,1,1,1
+access_reference_tag_user,access.reference.tag.user,model_reference_tag,base.group_user,1,0,0,0
+access_reference_tag_manager,access.reference.tag.manager,model_reference_tag,base.group_erp_manager,1,1,1,1
+access_reference_stage_user,access.reference.stage.user,model_reference_stage,base.group_user,1,0,0,0
+access_reference_stage_manager,access.reference.stage.manager,model_reference_stage,base.group_erp_manager,1,1,1,1
+access_reference_website_tag_user,access.reference.website.tag.user,model_reference_website_tag,base.group_user,1,0,0,0
+access_reference_website_tag_manager,access.reference.website.tag.manager,model_reference_website_tag,base.group_erp_manager,1,1,1,1
+access_reference_technology_user,access.reference.technology.user,model_reference_technology,base.group_user,1,0,0,0
+access_reference_technology_manager,access.reference.technology.manager,model_reference_technology,base.group_erp_manager,1,1,1,1
+access_reference_service_type_user,access.reference.service.type.user,model_reference_service_type,base.group_user,1,0,0,0
+access_reference_service_type_manager,access.reference.service.type.manager,model_reference_service_type,base.group_erp_manager,1,1,1,1
+access_reference_channel_user,access.reference.channel.user,model_reference_channel,base.group_user,1,0,0,0
+access_reference_channel_manager,access.reference.channel.manager,model_reference_channel,base.group_erp_manager,1,1,1,1
+access_reference_target_group_user,access.reference.target.group.user,model_reference_target_group,base.group_user,1,0,0,0
+access_reference_target_group_manager,access.reference.target.group.manager,model_reference_target_group,base.group_erp_manager,1,1,1,1

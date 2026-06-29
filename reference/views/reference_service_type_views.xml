@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Reference Service Type views -->
+    <record id="reference_service_type_list_view" model="ir.ui.view">
+        <field name="name">reference.service.type_list_view</field>
+        <field name="model">reference.service.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="reference_service_type_form_view" model="ir.ui.view">
+        <field name="name">reference.service.type_form_view</field>
+        <field name="model">reference.service.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet string="Reference Service Type">
+                    <widget name="web_ribbon" text="Archived" bg_color="text-bg-danger" invisible="active" />
+                    <field name="active" invisible="1" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Service type name ...." />
+                        </h1>
+                    </div>
+                    <group name="service_type_main">
+                        <group name="studio_group_9062d4_left" />
+                        <group name="studio_group_9062d4_right" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="reference_service_type_search_view" model="ir.ui.view">
+        <field name="name">reference.service.type_search_view</field>
+        <field name="model">reference.service.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <separator />
+                <filter string="Archived" name="archived_service_types" domain="[('active', '=', False)]" />
+                <separator />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_reference_service_type" model="ir.actions.act_window">
+        <field name="name">Service Types</field>
+        <field name="res_model">reference.service.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

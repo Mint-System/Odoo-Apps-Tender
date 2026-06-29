@@ -1,7 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="${MODEL_NAME}_demo" model="$MODEL_DOT_NAME">
-        <field name="name">$MODEL_DESCRIPTION</field>
-        <field name="value">demo</field>
+    <!-- Demo customer -->
+    <record id="demo_partner_customer" model="res.partner">
+        <field name="name">Muster AG</field>
+        <field name="is_company" eval="True" />
+    </record>
+
+    <!-- Demo contact person -->
+    <record id="demo_partner_contact" model="res.partner">
+        <field name="name">Max Meister</field>
+        <field name="parent_id" ref="reference.demo_partner_customer" />
+        <field name="is_company" eval="False" />
+    </record>
+
+    <!-- Demo industry -->
+    <record id="demo_industry_education" model="res.partner.industry">
+        <field name="name">Education</field>
+    </record>
+
+    <!-- Demo technologies -->
+    <record id="demo_technology_memcached" model="reference.technology">
+        <field name="name">Memcached</field>
+        <field name="active" eval="True" />
+    </record>
+    <record id="demo_technology_jenkins" model="reference.technology">
+        <field name="name">Jenkins</field>
+        <field name="active" eval="True" />
+    </record>
+    <record id="demo_technology_odoo" model="reference.technology">
+        <field name="name">Odoo</field>
+        <field name="active" eval="True" />
+    </record>
+    <record id="demo_technology_odoo_studio" model="reference.technology">
+        <field name="name">Odoo Studio</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <!-- Demo website tag -->
+    <record id="demo_website_tag_digital_transformation" model="reference.website.tag">
+        <field name="name">Digital Transformation</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <!-- Demo service type -->
+    <record id="demo_service_type_service_contract" model="reference.service.type">
+        <field name="name">Service contract</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <!-- Demo reference -->
+    <record id="demo_reference_1" model="reference.reference">
+        <field name="name">Demo Referenz XY</field>
+        <field name="customer_id" ref="reference.demo_partner_customer" />
+        <field name="contact_id" ref="reference.demo_partner_contact" />
+        <field name="project_start">2025-05-01</field>
+        <field name="project_end">2026-01-31</field>
+        <field
+            name="industry_ids"
+            eval="[(6, 0, [ref('reference.demo_industry_education')])]"
+        />
+        <field
+            name="technology_ids"
+            eval="[(6, 0, [
+                ref('reference.demo_technology_memcached'),
+                ref('reference.demo_technology_jenkins'),
+                ref('reference.demo_technology_odoo'),
+                ref('reference.demo_technology_odoo_studio'),
+            ])]"
+        />
+        <field
+            name="website_tag_ids"
+            eval="[(6, 0, [ref('reference.demo_website_tag_digital_transformation')])]"
+        />
+        <field
+            name="success_story"
+        ><![CDATA[<div data-oe-version="1.2">Titel Success Story<br>Text der Success Story (wenn freigegeben, abgeglichen mit Website)</div>]]></field>
+        <field
+            name="service_type_ids"
+            eval="[(6, 0, [ref('reference.demo_service_type_service_contract')])]"
+        />
     </record>
 </odoo>

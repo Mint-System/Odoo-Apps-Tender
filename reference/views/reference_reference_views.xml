@@ -1,85 +1,446 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="reference_reference_form_view" model="ir.ui.view">
-        <field name="name">reference.reference_reference_form_view</field>
-        <field name="model">reference.reference</field>
-        <field name="arch" type="xml">
-            <form>
-                <header>
-                    <field name="state" widget="statusbar" select="1" readonly="1" />
-                    <!-- <button name="button_confirm" string="Confirm" type="object" /> -->
-                </header>
-                <sheet>
-                    <div class="oe_button_box" name="button_box" />
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" />
-                        </h1>
-                    </div>
-                    <notebook>
-                        <page string="General Information" name="general_info">
-                            <group>
-                                <group>
-                                    <field name="value" />
-                                </group>
-                            </group>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="reference_reference_list_view" model="ir.ui.view">
-        <field name="name">reference.reference_reference_list_view</field>
-        <field name="model">reference.reference</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name" />
-                <field name="value" />
-            </list>
-        </field>
-    </record>
-
+    <!-- Search view must be defined before actions that reference it -->
     <record id="reference_reference_search_view" model="ir.ui.view">
-        <field name="name">reference.reference_reference_search_view</field>
+        <field name="name">reference.reference_search_view</field>
         <field name="model">reference.reference</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" />
-                <field name="value" />
+                <field
+                    name="name"
+                    string="Search"
+                    filter_domain="['|', '|', '|', '|', ('name', 'ilike', self), ('customer_id', 'ilike', self), ('short_reference', 'ilike', self), ('sales_reference', 'ilike', self), ('success_story', 'ilike', self)]"
+                />
+                <field name="customer_id" />
+                <field name="success_story" />
+                <field name="sales_reference" />
+                <field name="website_tag_ids" />
+                <field name="technology_ids" />
+                <field name="industry_ids" />
+                <field name="service_type_ids" />
+                <field name="tag_ids" />
+                <field name="opportunity_source_ids" />
+                <field name="opportunity_usage_ids" />
+                <filter
+                    string="My References"
+                    name="my_references"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <filter
+                    name="my_activities"
+                    string="My Activities"
+                    domain="[('activity_ids.user_id', '=', uid)]"
+                />
+                <separator />
+                <filter
+                    name="duration_from"
+                    string="Duration from"
+                    date="project_start"
+                />
+                <filter name="duration_to" string="Duration to" date="project_end" />
                 <separator />
                 <filter
                     string="Archived"
-                    name="inactive"
+                    name="archived_references"
                     domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    string="With Testimonial"
+                    name="with_testimonial"
+                    domain="[('testimonial', '!=', False)]"
+                />
+                <filter
+                    string="With Success Story"
+                    name="with_success_story"
+                    domain="[('success_story', '!=', False)]"
+                />
+                <group name="reference_group_by" />
+                <filter
+                    name="groupby_user_id"
+                    string="Puzzle Owner"
+                    context="{'group_by': 'user_id'}"
+                    domain="[]"
+                />
+                <filter
+                    name="groupby_stage_id"
+                    string="Stage"
+                    context="{'group_by': 'stage_id'}"
+                    domain="[]"
+                />
+                <filter
+                    name="groupby_website_tags"
+                    string="Website Tags"
+                    context="{'group_by': 'website_tag_ids'}"
+                />
+                <filter
+                    name="groupby_technologies"
+                    string="Technologies / Tools"
+                    context="{'group_by': 'technology_ids'}"
                 />
             </search>
         </field>
     </record>
 
-    <record id="action_reference_reference_view" model="ir.actions.act_window">
-        <field name="name">References</field>
+    <!-- Main action -->
+    <record id="action_reference_reference" model="ir.actions.act_window">
+        <field name="name">References &amp; Success Stories</field>
         <field name="res_model">reference.reference</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="search_view_id" ref="reference_reference_search_view" />
+        <field name="context">{'search_default_my_references': 1}</field>
+    </record>
+
+    <!-- My References action -->
+    <record id="action_my_references" model="ir.actions.act_window">
+        <field name="name">My References</field>
+        <field name="res_model">reference.reference</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="domain">[("user_id", "=", uid)]</field>
         <field name="search_view_id" ref="reference_reference_search_view" />
     </record>
 
-    <menuitem
-        id="reference.menu_root"
-        name="Documents"
-        web_icon="reference,static/description/icon.png"
-    />
-    <menuitem
-        id="reference.menu_document"
-        name="Documents"
-        parent="reference.menu_root"
-    />
-    <menuitem
-        id="reference.menu_reference_reference"
-        name="References"
-        parent="reference.menu_document"
-        action="reference.action_reference_reference_view"
-        sequence="10"
-    />
+    <!-- My Activities action -->
+    <record id="action_my_activities" model="ir.actions.act_window">
+        <field name="name">My Activities</field>
+        <field name="res_model">reference.reference</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="domain">[("activity_ids.active", "in", [True, False])]</field>
+        <field name="context">{'search_default_my_activities': 1}</field>
+        <field name="search_view_id" ref="reference_reference_search_view" />
+    </record>
+
+    <!-- Reference Kanban view -->
+    <record id="reference_reference_kanban_view" model="ir.ui.view">
+        <field name="name">reference.reference_kanban_view</field>
+        <field name="model">reference.reference</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" highlight_color="color">
+                <field name="color" />
+                <progressbar
+                    field="kanban_state"
+                    colors='{"normal": "200", "done": "success", "blocked": "danger"}'
+                />
+                <templates>
+                    <t t-name="menu">
+                        <a
+                            t-if="widget.editable"
+                            role="menuitem"
+                            type="open"
+                            class="dropdown-item"
+                        >Edit</a>
+                        <a
+                            t-if="widget.deletable"
+                            role="menuitem"
+                            type="delete"
+                            class="dropdown-item"
+                        >Delete</a>
+                        <field widget="kanban_color_picker" name="color" />
+                    </t>
+                    <t t-name="card" class="flex-row">
+                        <main>
+                            <div name="kanban_header" class="d-flex">
+                                <field name="display_name" class="h5" />
+                                <field
+                                    name="customer_id"
+                                    display="full"
+                                    options="{'no_create': true}"
+                                    widget="many2one_avatar"
+                                    class="h5"
+                                />
+                            </div>
+                            <field
+                                name="project_start"
+                                display="full"
+                                widget="daterange"
+                                options="{'end_date_field': 'project_end'}"
+                            />
+                            <footer>
+                                <field name="currency_id" invisible="1" />
+                                <field name="project_volume" display="full" />
+                                <div class="ms-auto d-flex align-items-center">
+                                    <field
+                                        name="user_id"
+                                        widget="kanban.many2one_avatar_user"
+                                        options="{'no_create': true}"
+                                    />
+                                </div>
+                            </footer>
+                            <field
+                                name="activity_ids"
+                                display="full"
+                                widget="list_activity"
+                            />
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Reference List view -->
+    <record id="reference_reference_list_view" model="ir.ui.view">
+        <field name="name">reference.reference_list_view</field>
+        <field name="model">reference.reference</field>
+        <field name="arch" type="xml">
+            <list multi_edit="1">
+                <field name="name" />
+                <field
+                    name="customer_id"
+                    optional="show"
+                    options="{'no_create': true}"
+                />
+                <field
+                    name="website_tag_ids"
+                    optional="show"
+                    widget="many2many_tags"
+                    options="{'no_create': true}"
+                />
+                <field
+                    name="technology_ids"
+                    optional="show"
+                    widget="many2many_tags"
+                    options="{'no_create': true}"
+                />
+                <field
+                    name="industry_ids"
+                    optional="show"
+                    widget="many2many_tags"
+                    options="{'no_create': true}"
+                />
+                <field
+                    name="tag_ids"
+                    optional="hide"
+                    widget="many2many_tags"
+                    options="{'no_create': true}"
+                />
+                <field
+                    name="project_start"
+                    optional="show"
+                    widget="date"
+                    string="From"
+                />
+                <field name="project_end" optional="show" string="To" />
+                <field name="activity_date_deadline" optional="hide" />
+                <field
+                    name="activity_user_id"
+                    optional="hide"
+                    string="Activity by"
+                    widget="many2one_avatar"
+                />
+                <field name="activity_ids" optional="show" widget="list_activity" />
+                <field
+                    name="write_uid"
+                    optional="hide"
+                    groups="base.group_erp_manager"
+                />
+                <field
+                    name="write_date"
+                    optional="hide"
+                    groups="base.group_erp_manager"
+                />
+            </list>
+        </field>
+    </record>
+
+    <!-- Reference Form view -->
+    <record id="reference_reference_form_view" model="ir.ui.view">
+        <field name="name">reference.reference_form_view</field>
+        <field name="model">reference.reference</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
+                </header>
+                <sheet string="References">
+                    <widget
+                        name="web_ribbon"
+                        text="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="1" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Name..." />
+                        </h1>
+                    </div>
+                    <group name="reference_summary">
+                        <group name="reference_summary_left">
+                            <field name="short_reference" />
+                        </group>
+                        <group name="reference_summary_right">
+                            <field
+                                name="customer_id"
+                                domain="[('is_company', '=', True)]"
+                            />
+                            <field
+                                name="industry_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': true}"
+                                help="Based on NOGA industries"
+                            />
+                            <field
+                                name="project_start"
+                                widget="daterange"
+                                options="{'end_date_field': 'project_end', 'show_seconds': false, 'show_time': false}"
+                                string="Duration (from &gt; to)"
+                                help="Duration of the project / contract (inkl. extensions)"
+                            />
+                            <field
+                                name="user_id"
+                                widget="many2one_avatar_user"
+                                options="{'no_create': true}"
+                                help="Puzzle member who leads the reference (PM, AM, BL etc.)"
+                                string="Puzzle Owner"
+                            />
+                            <field
+                                name="tag_ids"
+                                widget="many2many_tags"
+                                options="{'edit_tags': false}"
+                                help="Tags to work/filter on references"
+                            />
+                        </group>
+                    </group>
+                    <notebook name="reference_notebook">
+                        <page string="Sales Reference" name="sales_reference">
+                            <group name="sales_reference_group">
+                                <field
+                                    name="sales_reference"
+                                    help="Keywords or prose divided into important topics. No longer than 1500 characters, short sentences. Basis for success stories or usable in offers."
+                                />
+                                <field
+                                    name="opportunity_source_ids"
+                                    widget="many2many_tags"
+                                    options="{'edit_tags': true, 'no_create': true}"
+                                    help="Opportunities this reference bases on over whole duration."
+                                    domain="[('active', 'in', [True, False])]"
+                                />
+                                <field
+                                    name="opportunity_usage_ids"
+                                    widget="many2many_tags"
+                                    options="{'no_create': true, 'edit_tags': true}"
+                                    help="In what opportunities is this reference already used?"
+                                    domain="[('active', 'in', [True, False])]"
+                                />
+                            </group>
+                        </page>
+                        <page string="Project &amp; Services" name="project_services">
+                            <group name="project_services_group">
+                                <field
+                                    name="service_type_ids"
+                                    widget="many2many_tags"
+                                    options="{'no_create': true}"
+                                    help="Service Types used for this project / reference?"
+                                />
+                                <field
+                                    name="member_ids"
+                                    widget="many2many_avatar_user"
+                                    options="{'no_create': true, 'edit_tags': false}"
+                                    help="Puzzle members which were involved in project"
+                                />
+                                <field
+                                    name="technology_ids"
+                                    widget="many2many_tags"
+                                    options="{'no_quick_create': true}"
+                                    string="Technologies, Tools &amp; Methodologies"
+                                    help="Select all relevant tags. Additional can be added if relevant/important enough for the future"
+                                />
+                                <field
+                                    name="currency_id"
+                                    options="{'no_open': true, 'no_create': true}"
+                                />
+                                <field
+                                    name="project_volume"
+                                    help="Project/order volume (incl. follow-up orders)"
+                                />
+                                <field
+                                    name="project_volume_days"
+                                    help="Total of days PITC worked on this reference?"
+                                />
+                            </group>
+                        </page>
+                        <page
+                            string="Success Story &amp; Testimonial"
+                            name="success_story_testimonial"
+                        >
+                            <group name="success_story_group">
+                                <field
+                                    name="success_story"
+                                    help="Project description; used on the website (&lt; 1000 characters incl. Spaces)"
+                                />
+                                <field
+                                    name="key_aspects"
+                                    help="3-4 figures that confirm the scope/benefits/success of the solution. Used for success story on website."
+                                />
+                                <field
+                                    name="testimonial"
+                                    help="Customer statement on cooperation"
+                                />
+                                <field
+                                    name="testimonial_author"
+                                    help="First and last name, job title"
+                                />
+                                <field
+                                    name="website_tag_ids"
+                                    widget="many2many_tags"
+                                    options="{'no_quick_create': true, 'no_create': true}"
+                                    help="Categories of the website where reference/success story can be used."
+                                />
+                                <field name="website_url" widget="url" />
+                            </group>
+                        </page>
+                        <page string="Approval &amp; Usage" name="approval_usage">
+                            <group name="approval_group">
+                                <group name="approval_left">
+                                    <field
+                                        name="customer_owner_id"
+                                        domain="[('is_company', '=', False)]"
+                                        options="{'no_create': true}"
+                                        widget="many2one_avatar"
+                                        help="Contact person approving the reference/success story"
+                                        string="Customer Owner"
+                                    />
+                                    <field
+                                        name="usage_type"
+                                        help="If restricted usage, allowed channels have to be selected"
+                                        string="Allowed usage"
+                                    />
+                                    <field
+                                        name="channel_ids"
+                                        widget="many2many_tags"
+                                        options="{'no_create': true}"
+                                        help="If restricted usage, allowed channels have to be selected"
+                                        invisible="usage_type != 'restrictedUse'"
+                                        string="Allowed channels"
+                                    />
+                                    <field
+                                        name="contact_id"
+                                        domain="[('is_company', '=', False)]"
+                                        options="{'no_create': true}"
+                                        string="Sales Reference Contact"
+                                        help="If different from Customer Owner only"
+                                        invisible="usage_type == 'internalOnly'"
+                                        widget="many2one_avatar"
+                                    />
+                                </group>
+                                <group name="approval_right">
+                                    <field name="write_date" />
+                                    <field
+                                        name="write_uid"
+                                        widget="many2one_avatar_user"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
 </odoo>

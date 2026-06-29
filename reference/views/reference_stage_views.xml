@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Reference Stage views -->
+    <record id="reference_stage_list_view" model="ir.ui.view">
+        <field name="name">reference.stage_list_view</field>
+        <field name="model">reference.stage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="reference_stage_form_view" model="ir.ui.view">
+        <field name="name">reference.stage_form_view</field>
+        <field name="model">reference.stage</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet string="Reference Stage">
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Name..." />
+                        </h1>
+                    </div>
+                    <group name="stage_main">
+                        <group name="studio_group_007d36_left" />
+                        <group name="studio_group_007d36_right" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="reference_stage_search_view" model="ir.ui.view">
+        <field name="name">reference.stage_search_view</field>
+        <field name="model">reference.stage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_reference_stage" model="ir.actions.act_window">
+        <field name="name">Reference Stages</field>
+        <field name="res_model">reference.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
