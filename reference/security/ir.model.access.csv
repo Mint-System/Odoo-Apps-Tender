@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reference_reference_user,access.reference.reference.user,model_reference_reference,base.group_user,1,0,0,0
+access_reference_reference_manager,access.reference.reference.manager,model_reference_reference,base.group_erp_manager,1,1,1,1

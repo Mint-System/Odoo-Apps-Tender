@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="reference_reference_form_view" model="ir.ui.view">
+        <field name="name">reference.reference_reference_form_view</field>
+        <field name="model">reference.reference</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" select="1" readonly="1" />
+                    <!-- <button name="button_confirm" string="Confirm" type="object" /> -->
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="General Information" name="general_info">
+                            <group>
+                                <group>
+                                    <field name="value" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="reference_reference_list_view" model="ir.ui.view">
+        <field name="name">reference.reference_reference_list_view</field>
+        <field name="model">reference.reference</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="value" />
+            </list>
+        </field>
+    </record>
+
+    <record id="reference_reference_search_view" model="ir.ui.view">
+        <field name="name">reference.reference_reference_search_view</field>
+        <field name="model">reference.reference</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="value" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_reference_reference_view" model="ir.actions.act_window">
+        <field name="name">References</field>
+        <field name="res_model">reference.reference</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="reference_reference_search_view" />
+    </record>
+
+    <menuitem
+        id="reference.menu_root"
+        name="Documents"
+        web_icon="reference,static/description/icon.png"
+    />
+    <menuitem
+        id="reference.menu_document"
+        name="Documents"
+        parent="reference.menu_root"
+    />
+    <menuitem
+        id="reference.menu_reference_reference"
+        name="References"
+        parent="reference.menu_document"
+        action="reference.action_reference_reference_view"
+        sequence="10"
+    />
+</odoo>

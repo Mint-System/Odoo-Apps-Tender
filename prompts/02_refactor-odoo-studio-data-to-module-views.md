@@ -20,7 +20,8 @@ Read the `AGENTS.md` and `README.md` to get an understanding of the project.
 ## Task
 
 In the last session you have completed the prompt
-`addons/tender/prompts/01_refactor-odoo-studio-app-to-module-models.md`. Study the file carefully.
+`addons/tender/prompts/01_refactor-odoo-studio-app-to-module-models.md`. Study the file
+carefully.
 
 Now I would like to create the following module resources:
 
@@ -41,7 +42,8 @@ Then create default views for each model with
 `task generate-module-views addons/tender/reference reference.reference`. Update the
 view definitions according to the definitions of the Studio apps.
 
-Note that the new views must not have any xml edits. Xml edit can be identified by the `position` attribute. Try to reconstruct the final views.
+Note that the new views must not have any xml edits. Xml edit can be identified by the
+`position` attribute. Try to reconstruct the final views.
 
 While re-creating the views keep in mind that all field names have been mapped to new
 names `FIELD_MAPPING.md`.

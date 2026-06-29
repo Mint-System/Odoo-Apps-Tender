@@ -85,16 +85,16 @@ References (fa fa-newspaper-o, #0079BF)
 
 **2. Models Created (8 models total):**
 
-| Studio Model | New Module Model | Description |
-|---|---|---|
-| `x_references` | `reference.reference` | Main References model |
-| `x_references_stage` | `reference.stage` | Reference Stages |
-| `x_website_tags` | `reference.website_tag` | Website Tags |
-| `x_technologies` | `reference.technology` | Technologies, Tools & Methods |
-| `x_service_types` | `reference.service_type` | Service Types |
-| `x_reference_channels` | `reference.channel` | Reference Channels |
-| `x_reference_tags` | `reference.tag` | Reference Tags |
-| `x_target_group` | `reference.target_group` | Target Group/Persona |
+| Studio Model           | New Module Model         | Description                   |
+| ---------------------- | ------------------------ | ----------------------------- |
+| `x_references`         | `reference.reference`    | Main References model         |
+| `x_references_stage`   | `reference.stage`        | Reference Stages              |
+| `x_website_tags`       | `reference.website_tag`  | Website Tags                  |
+| `x_technologies`       | `reference.technology`   | Technologies, Tools & Methods |
+| `x_service_types`      | `reference.service_type` | Service Types                 |
+| `x_reference_channels` | `reference.channel`      | Reference Channels            |
+| `x_reference_tags`     | `reference.tag`          | Reference Tags                |
+| `x_target_group`       | `reference.target_group` | Target Group/Persona          |
 
 **3. Fields in `reference.reference` (32 fields):**
 
@@ -163,24 +163,24 @@ Portfolio (fa fa-th-list, #2ecc71)
 
 **2. Models Created (16 models total):**
 
-| Studio Model | New Module Model | Features |
-|---|---|---|
-| `x_solutions` | `portfolio.solution` | Main model, mail_thread + activity, 38 fields |
-| `x_solutions_stage` | `portfolio.solution_stage` | Stage config, description field |
-| `x_bcg_matrix` | `portfolio.bcg_matrix` | BCG configuration, image |
-| `x_solutions_tag` | `portfolio.solution_tag` | Tag model |
-| `x_solutions_goals_acti` | `portfolio.goal_task` | Goals & key tasks, mail_thread + activity, 24 fields |
-| `x_solutions_goals_acti_stage` | `portfolio.goal_task_stage` | Stage config, description |
-| `x_solutions_goals_acti_tag` | `portfolio.goal_task_tag` | Tag model |
-| `x_contact_type` | `portfolio.contact_type` | With One2many lines |
-| `x_contact_type_line` | `portfolio.contact_type_line` | Line model |
-| `x_account_level` | `portfolio.account_level` | With One2many lines |
-| `x_account_level_line` | `portfolio.account_level_line` | Line model |
-| `x_partner_level` | `portfolio.partner_level` | With One2many lines |
-| `x_partner_level_line` | `portfolio.partner_level_line` | Line model |
-| `x_portfolio_entry_type` | `portfolio.entry_type` | With One2many lines, hex_color |
-| `x_portfolio_entry_type_line` | `portfolio.entry_type_line` | Line model |
-| `x_portfolio_entry_stat` | `portfolio.entry_state` | State color |
+| Studio Model                   | New Module Model               | Features                                             |
+| ------------------------------ | ------------------------------ | ---------------------------------------------------- |
+| `x_solutions`                  | `portfolio.solution`           | Main model, mail_thread + activity, 38 fields        |
+| `x_solutions_stage`            | `portfolio.solution_stage`     | Stage config, description field                      |
+| `x_bcg_matrix`                 | `portfolio.bcg_matrix`         | BCG configuration, image                             |
+| `x_solutions_tag`              | `portfolio.solution_tag`       | Tag model                                            |
+| `x_solutions_goals_acti`       | `portfolio.goal_task`          | Goals & key tasks, mail_thread + activity, 24 fields |
+| `x_solutions_goals_acti_stage` | `portfolio.goal_task_stage`    | Stage config, description                            |
+| `x_solutions_goals_acti_tag`   | `portfolio.goal_task_tag`      | Tag model                                            |
+| `x_contact_type`               | `portfolio.contact_type`       | With One2many lines                                  |
+| `x_contact_type_line`          | `portfolio.contact_type_line`  | Line model                                           |
+| `x_account_level`              | `portfolio.account_level`      | With One2many lines                                  |
+| `x_account_level_line`         | `portfolio.account_level_line` | Line model                                           |
+| `x_partner_level`              | `portfolio.partner_level`      | With One2many lines                                  |
+| `x_partner_level_line`         | `portfolio.partner_level_line` | Line model                                           |
+| `x_portfolio_entry_type`       | `portfolio.entry_type`         | With One2many lines, hex_color                       |
+| `x_portfolio_entry_type_line`  | `portfolio.entry_type_line`    | Line model                                           |
+| `x_portfolio_entry_stat`       | `portfolio.entry_state`        | State color                                          |
 
 **3. Dependencies:**
 

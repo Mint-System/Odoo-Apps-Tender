@@ -13,5 +13,5 @@ git clone git@github.com:Mint-System/Odoo-Apps-Tender.git ./addons/tender
 ## Available modules
 
 | Module | Summary |
-| ------ | ------- |
-|        |         |
+| --- | --- |
+| [reference](reference) | Manage references for tender applications. |
