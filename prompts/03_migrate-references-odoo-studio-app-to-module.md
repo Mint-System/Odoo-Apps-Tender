@@ -92,6 +92,9 @@ have already created an example.
 
 Update the view definitions according to the definitions of the Studio app.
 
+
+When naming `group` tags, give a fitting name and not the generic Studio name.
+
 Note that the new views must not have any xml edits. Xml edit can be identified by the
 `position` attribute. Try to reconstruct the final views.
 
