@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="reference_stage_new" model="reference.stage">
-        <field name="name">New</field>
-        <field name="sequence">1</field>
+        <field name="name">New (Short Reference)</field>
+        <field name="sequence" eval="0" />
     </record>
 </odoo>
