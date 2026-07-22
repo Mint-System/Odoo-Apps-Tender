@@ -34,6 +34,8 @@ Take into account that field names were changed when the reference module was cr
 
 The data of related models are in the excel files in `$HOME/Odoo-Build/tmp/customizations/studio_customization/demo_data`.
 
+For `reference.website.tag` and `reference.technology` create only minimum instances for working demo reference. 
+
 The default stage needed for a reference even if no demo data are provided is `New (Short Reference)`. It should be stored in `addons/tender/reference/data/reference_stage_data.xml`.
 
 The industries data are odoo standard industries defined in `odoo/addons/base/data/res_partner_data.xml` so there is no need to create them. Just link to these industries instances.
@@ -49,8 +51,8 @@ The industries data are odoo standard industries defined in `odoo/addons/base/da
   - 3 demo `res.partner` records: customer "Muster AG", contact "Max Meister", and customer owner "Martin Müller".
   - 6 demo `reference.stage` records (sequence 0–5) from the stages export.
   - 8 demo `reference.channel` records from the channels export.
-  - ~39 demo `reference.website.tag` records with parent/child hierarchy preserved (root tags created before children so self-referential `category_id` refs resolve correctly).
-  - ~213 demo `reference.technology` records from the technologies export.
+  - 1 demo `reference.website.tag` record ("Digital Transformation") — the minimum instance needed by the demo reference.
+  - 4 demo `reference.technology` records (Memcached, Jenkins, Odoo, Odoo Studio) — the minimum instances needed by the demo reference.
   - 6 demo `reference.service.type` records from the service types export.
 - **Fixed Odoo 19 compatibility**: changed `groups_id` → `group_ids` on `res.users` demo records.
 - **Removed duplicate industries** from `demo.xml`. The base module already creates standard NOGA `res.partner.industry` records in `data/res_partner_data.xml`; creating them again would produce 42 entries (21 base + 21 duplicate). Updated the demo reference to link to the existing `base.res_partner_industry_P` for Education.
