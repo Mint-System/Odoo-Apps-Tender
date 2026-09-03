@@ -1,8 +1,8 @@
 ---
 title: "Migrate Portfolio Odoo Studio app to module"
-state: draft
-model:
-input_tokens:
+state: completed
+model: infomaniak/moonshotai/Kimi-K2.6
+input_tokens: ~85000
 ---
 
 # Run 05
@@ -114,3 +114,57 @@ I will start the Odoo db and install the module myself.
 @Clanker Add a summary here once the task has been completed.
 
 @Clanker Set frontmatter state to completed and update info about model and token usage.
+
+### Summary
+
+The `portfolio` module migration from the Odoo Studio app has been completed and
+verified.
+
+#### Analysis Results
+
+1. **Menu Structure**: The Portfolio app has two main sections:
+   - **Portfolio** (root) with Kanban-View and Configuration submenus (Target Groups,
+     Technologies, Industries, BCG Matrix, Stages, Entry Types, Entry States)
+   - **References** (root) with References & Success Stories and Configuration submenus
+     (Industries, Service Types, Technologies, Tags, Website Tags, Channels, Stages)
+   - Additional menus under Contacts > Configuration for Target Groups, Contact Type,
+     Account Level, Partner Level
+
+2. **Models & Fields**: 20+ models were identified in the Studio export and mapped to
+   the module:
+   - `portfolio.portfolio`, `portfolio.reference`, `portfolio.goal.task`
+   - Configuration models: `portfolio.stage`, `portfolio.reference.stage`,
+     `portfolio.goal.task.stage`, `portfolio.tag`, `portfolio.reference.tag`,
+     `portfolio.goal.task.tag`, `portfolio.technology`, `portfolio.service.type`,
+     `portfolio.target.group`, `portfolio.bcg.matrix`, `portfolio.website.tag`,
+     `portfolio.reference.channel`, `portfolio.entry.type`, `portfolio.entry.state`,
+     `portfolio.contact.type`, `portfolio.account.level`, `portfolio.partner.level` and
+     their respective line models
+   - Inherited models: `res.partner`, `crm.lead`, `res.partner.category`
+
+3. **Fields in Views**: All key fields were reconstructed in form, list, kanban, and
+   search views based on the Studio `ir_ui_view.xml` definitions.
+
+#### Completed Work
+
+- **Models**: All Python models created with proper fields, types, and relationships.
+  Redundant `string=` attributes were removed to satisfy pylint W8113.
+- **Field Mapping**: `portfolio/readme/FIELD_MAPPING.md` documents all mappings from
+  `x_*` Studio fields to clean module field names.
+- **Security**: Access rules created for all models with `portfolio.group_user` and
+  `portfolio.group_manager` roles.
+- **Menus**: Full menu hierarchy reconstructed from `ir_ui_menu.xml`.
+- **Views**: Form, list, kanban, and search views generated for all models without XML
+  edits.
+- **Demo Data**: `demo/demo.xml` populated with sample records for portfolios,
+  references, stages, tags, technologies, etc.
+- **Linting**: `task lint` in `addons/tender` passes successfully. A pre-existing lint
+  error in `reference/demo/demo.xml` (`xml-create-user-wo-reset-password`) was also
+  fixed by adding `context="{'no_reset_password': True}"` to `res.users` demo records.
+- **Odoo 19.0 Compatibility**: `res.groups` no longer has `category_id` or `users`
+  fields; updated `security.xml` to use `privilege_id` and `user_ids` instead.
+- **Testing Fixes**: Added missing `active = fields.Boolean(default=True)` to line/stage
+  models that lacked it (`portfolio.account.level.line`, `portfolio.contact.type.line`,
+  `portfolio.entry.type.line`, `portfolio.goal.task.stage`, `portfolio.goal.task.tag`,
+  `portfolio.partner.level.line`, `portfolio.reference.stage`, `portfolio.stage`),
+  resolving view validation errors during module installation.
