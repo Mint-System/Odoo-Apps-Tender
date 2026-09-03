@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Reference Stage views -->
     <record id="reference_stage_list_view" model="ir.ui.view">

@@ -1,13 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Reference Website Tag views -->
     <record id="reference_website_tag_list_view" model="ir.ui.view">
         <field name="name">reference.website.tag_list_view</field>
         <field name="model">reference.website.tag</field>
         <field name="arch" type="xml">
-            <list default_group_by="category_id" default_order="name asc" editable="bottom" multi_edit="1">
+            <list
+                default_group_by="category_id"
+                default_order="name asc"
+                editable="bottom"
+                multi_edit="1"
+            >
                 <field name="name" />
-                <field name="category_id" optional="show" options="{'create_name_field': 'x_name'}" />
+                <field
+                    name="category_id"
+                    optional="show"
+                    options="{'create_name_field': 'x_name'}"
+                />
                 <field name="display_color" optional="show" widget="color_picker" />
             </list>
         </field>
@@ -20,7 +29,12 @@
             <form>
                 <header />
                 <sheet string="Reference Website Tag">
-                    <widget name="web_ribbon" text="Archived" bg_color="text-bg-danger" invisible="active" />
+                    <widget
+                        name="web_ribbon"
+                        text="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
                     <field name="active" invisible="1" />
                     <div class="oe_title">
                         <h1>
@@ -43,7 +57,11 @@
             <search>
                 <field name="name" />
                 <separator />
-                <filter string="Archived" name="archived_website_tags" domain="[('active', '=', False)]" />
+                <filter
+                    string="Archived"
+                    name="archived_website_tags"
+                    domain="[('active', '=', False)]"
+                />
                 <separator />
             </search>
         </field>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Demo customer -->
     <record id="demo_partner_customer" model="res.partner">
@@ -66,12 +66,18 @@
         <field name="sequence" eval="2" />
         <field name="active" eval="True" />
     </record>
-    <record id="demo_service_type_service_level_agreement" model="reference.service.type">
+    <record
+        id="demo_service_type_service_level_agreement"
+        model="reference.service.type"
+    >
         <field name="name">Service Level Agreement</field>
         <field name="sequence" eval="5" />
         <field name="active" eval="True" />
     </record>
-    <record id="demo_service_type_subscriptions_licensing" model="reference.service.type">
+    <record
+        id="demo_service_type_subscriptions_licensing"
+        model="reference.service.type"
+    >
         <field name="name">Subscriptions &amp; Licensing</field>
         <field name="sequence" eval="4" />
         <field name="active" eval="True" />
@@ -93,7 +99,10 @@
     </record>
 
     <!-- Demo channels -->
-    <record id="demo_channel_puzzle_ch_references_logo_banner" model="reference.channel">
+    <record
+        id="demo_channel_puzzle_ch_references_logo_banner"
+        model="reference.channel"
+    >
         <field name="name">puzzle.ch, references (logo banner)</field>
         <field name="sequence" eval="10" />
         <field name="active" eval="True" />
@@ -118,7 +127,10 @@
         <field name="sequence" eval="14" />
         <field name="active" eval="True" />
     </record>
-    <record id="demo_channel_sales_with_approval_of_reference_text" model="reference.channel">
+    <record
+        id="demo_channel_sales_with_approval_of_reference_text"
+        model="reference.channel"
+    >
         <field name="name">Sales, with approval of reference text</field>
         <field name="sequence" eval="15" />
         <field name="active" eval="True" />
@@ -193,15 +205,28 @@
                 ref('reference.demo_technology_odoo_studio'),
             ])]"
         />
-        <field name="website_tag_ids" eval="[(6, 0, [ref('reference.demo_website_tag_digital_transformation')])]" />
+        <field
+            name="website_tag_ids"
+            eval="[(6, 0, [ref('reference.demo_website_tag_digital_transformation')])]"
+        />
         <field
             name="service_type_ids"
             eval="[(6, 0, [ref('reference.demo_service_type_service_contract')])]"
         />
-        <field name="sales_reference"><![CDATA[<h3 data-oe-version="1.2">Ausgangslage / Herausforderung</h3><ul><li>Welche Challenges hatte der Kunde?</li> <li>Welche Kundenbedürfnisse haben das Projekt ausgelöst?&nbsp;</li></ul><h3>Lösungsansatz</h3><ul><li>Welcher Lösungsansatz wurde gewählt? Weshalb?</li><li>Wie wurden die Herausforderungen gelöst?</li></ul><h3>Arbeitspakete / Weiterentwicklung (Liste!)</h3><ul><li>Welches Leistungen, Releases, Arbeitspakete hat Puzzle erfüllt?</li></ul><h3>Rolle / Aufgabe</h3><ul><li>Welche Rolle(n) / Verantwortungen hatte Puzzle?</li></ul><h3>Nutzen / Mehrwert</h3><ul><li>Welche Nutzen / Mehrwerte konnten erreicht / geschaffen werden?</li><li>ROI, Effizienzgewinn, wirtschaftlicher Betrieb etc.?</li><li>Belegt in Form von fassbaren Werten/Zahlen.</li></ul><h3>(Kunden)</h3><ul><li>Kundenbeschrieb im Kontext des vorherigen&nbsp;Abschnitts</li></ul><h3>(Subunternehmer)</h3><ul><li>Namen der eingesetzten Subunternehme, falls relevant.</li></ul><h3>(Ergänzende Informationen)</h3><ul><li>(Links, Hinweise, historische Infos etc.)</li></ul>]]></field>
-        <field name="success_story"><![CDATA[<div data-oe-version="1.2">Titel Success Story<br>Text der Success Story (wenn freigegeben, abgeglichen mit Website)</div>]]></field>
-        <field name="key_aspects"><![CDATA[<ul data-oe-version="1.2"><li>Aspekt 1</li><li>Aspekt 2</li><li>Aspekt 3</li></ul>]]></field>
-        <field name="testimonial"><![CDATA[<div data-oe-version="1.2">Mit der Lösung von Puzzle können wir unsere Plattform wesentlich effizienter betreiben.</div>]]></field>
-        <field name="short_reference"><![CDATA[<div data-oe-version="1.2">Mit der Lösung XY wird Problem XY adressiert. Damit kann Kunden XY den&nbsp;Geschäftsprozess XY neu wesentlich, einfacher,&nbsp;effizienter&nbsp;abwickeln. Puzzle implementiert&nbsp;moderne, skalierbare Software basierend auf Technologie XY und integriert schlank Umsystem XY.</div>]]></field>
+        <field
+            name="sales_reference"
+        ><![CDATA[<h3 data-oe-version="1.2">Ausgangslage / Herausforderung</h3><ul><li>Welche Challenges hatte der Kunde?</li> <li>Welche Kundenbedürfnisse haben das Projekt ausgelöst?&nbsp;</li></ul><h3>Lösungsansatz</h3><ul><li>Welcher Lösungsansatz wurde gewählt? Weshalb?</li><li>Wie wurden die Herausforderungen gelöst?</li></ul><h3>Arbeitspakete / Weiterentwicklung (Liste!)</h3><ul><li>Welches Leistungen, Releases, Arbeitspakete hat Puzzle erfüllt?</li></ul><h3>Rolle / Aufgabe</h3><ul><li>Welche Rolle(n) / Verantwortungen hatte Puzzle?</li></ul><h3>Nutzen / Mehrwert</h3><ul><li>Welche Nutzen / Mehrwerte konnten erreicht / geschaffen werden?</li><li>ROI, Effizienzgewinn, wirtschaftlicher Betrieb etc.?</li><li>Belegt in Form von fassbaren Werten/Zahlen.</li></ul><h3>(Kunden)</h3><ul><li>Kundenbeschrieb im Kontext des vorherigen&nbsp;Abschnitts</li></ul><h3>(Subunternehmer)</h3><ul><li>Namen der eingesetzten Subunternehme, falls relevant.</li></ul><h3>(Ergänzende Informationen)</h3><ul><li>(Links, Hinweise, historische Infos etc.)</li></ul>]]></field>
+        <field
+            name="success_story"
+        ><![CDATA[<div data-oe-version="1.2">Titel Success Story<br>Text der Success Story (wenn freigegeben, abgeglichen mit Website)</div>]]></field>
+        <field
+            name="key_aspects"
+        ><![CDATA[<ul data-oe-version="1.2"><li>Aspekt 1</li><li>Aspekt 2</li><li>Aspekt 3</li></ul>]]></field>
+        <field
+            name="testimonial"
+        ><![CDATA[<div data-oe-version="1.2">Mit der Lösung von Puzzle können wir unsere Plattform wesentlich effizienter betreiben.</div>]]></field>
+        <field
+            name="short_reference"
+        ><![CDATA[<div data-oe-version="1.2">Mit der Lösung XY wird Problem XY adressiert. Damit kann Kunden XY den&nbsp;Geschäftsprozess XY neu wesentlich, einfacher,&nbsp;effizienter&nbsp;abwickeln. Puzzle implementiert&nbsp;moderne, skalierbare Software basierend auf Technologie XY und integriert schlank Umsystem XY.</div>]]></field>
     </record>
 </odoo>
