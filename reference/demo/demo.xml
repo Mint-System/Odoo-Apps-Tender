@@ -21,7 +21,11 @@
     </record>
 
     <!-- Demo user: Puzzle Member (Demo) -->
-    <record id="demo_user_puzzle_member" model="res.users">
+    <record
+        id="demo_user_puzzle_member"
+        model="res.users"
+        context="{'no_reset_password': True}"
+    >
         <field name="name">Puzzle Member (Demo)</field>
         <field name="login">odoo+demo@puzzle.ch</field>
         <field name="email">odoo+demo@puzzle.ch</field>
@@ -29,7 +33,11 @@
     </record>
 
     <!-- Demo user: Bernhard Wyss (Puzzle Owner) -->
-    <record id="demo_user_bernhard_wyss" model="res.users">
+    <record
+        id="demo_user_bernhard_wyss"
+        model="res.users"
+        context="{'no_reset_password': True}"
+    >
         <field name="name">Bernhard Wyss</field>
         <field name="login">bernhard.wyss@puzzle.ch</field>
         <field name="email">bernhard.wyss@puzzle.ch</field>

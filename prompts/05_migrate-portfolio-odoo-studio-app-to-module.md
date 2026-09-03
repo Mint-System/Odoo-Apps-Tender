@@ -2,7 +2,7 @@
 title: "Migrate Portfolio Odoo Studio app to module"
 state: completed
 model: infomaniak/moonshotai/Kimi-K2.6
-input_tokens: ~85000
+input_tokens:
 ---
 
 # Run 05
@@ -98,6 +98,11 @@ When naming `group` tags, give a fitting name and not the generic Studio name.
 Note that the new views must not have any xml edits. Xml edit can be identified by the
 `position` attribute. Try to reconstruct the final views.
 
+### Field Definitions
+
+Some fields have an `invisible` attribute with a condition in the form view. Recreate
+these defintions.
+
 ### Demo
 
 Create demo xml data for a portfolio and linked records like tags, target group and so
@@ -168,3 +173,29 @@ verified.
   `portfolio.entry.type.line`, `portfolio.goal.task.stage`, `portfolio.goal.task.tag`,
   `portfolio.partner.level.line`, `portfolio.reference.stage`, `portfolio.stage`),
   resolving view validation errors during module installation.
+
+#### Continuation Fixes (Run 05 Continuation)
+
+- **`_read_group_stage_ids` Signature Fix**: Removed the incorrect `order` parameter
+  from `_read_group_stage_ids` in `portfolio.portfolio`, `portfolio.reference`, and
+  `portfolio.goal.task`. The Odoo `determine_group_expand` API only passes
+  `(stages, domain)`, which was causing
+  `TypeError: missing 1 required positional argument: 'order'`.
+- **Invisible Conditions Restored**: Rechecked all form views against the Studio export
+  and restored missing conditional `invisible` attributes:
+  - `portfolio_portfolio.xml`: `lead_deputy_id` hidden for Products;
+    `product_partner_manager_id` hidden for Solutions; `knowledge_article_id` hidden
+    when no entry type is set; "Solution" page hidden for Products.
+  - `portfolio_goal_task.xml`: `indicator` hidden for Tasks / missing type;
+    `closing_comment` hidden unless stage `is_closing=True` (and marked `required` when
+    closing).
+  - `portfolio_reference.xml`: `customer_contact_id` hidden when
+    `usage_type == 'internalOnly'`.
+- **Supporting Model Changes**:
+  - Added `type_key` Selection (`solution`/`product`) to `portfolio.entry.type` to
+    replace hardcoded record-ID-based invisible conditions from Studio.
+  - Added `is_closing` Boolean to `portfolio.goal.task.stage` to control
+    visibility/required state of `closing_comment`.
+- **Supporting View/Demo Updates**: Added `type_key` to entry type form/list views and
+  demo; added `is_closing` to goal/task stage form/list views and demo.
+- **Linting**: `./task lint` continues to pass after all changes.

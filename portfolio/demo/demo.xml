@@ -1,7 +1,236 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="${MODEL_NAME}_demo" model="$MODEL_DOT_NAME">
-        <field name="name">$MODEL_DESCRIPTION</field>
-        <field name="value">demo</field>
+    <!-- Portfolio Stages -->
+    <record id="stage_draft" model="portfolio.stage">
+        <field name="name">Draft</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="stage_active" model="portfolio.stage">
+        <field name="name">Active</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="stage_blocked" model="portfolio.stage">
+        <field name="name">Blocked</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- Reference Stages -->
+    <record id="reference_stage_new" model="portfolio.reference.stage">
+        <field name="name">New</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="reference_stage_ready" model="portfolio.reference.stage">
+        <field name="name">Ready</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="reference_stage_blocked" model="portfolio.reference.stage">
+        <field name="name">Blocked</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- Goal/Task Stages -->
+    <record id="goal_task_stage_plan" model="portfolio.goal.task.stage">
+        <field name="name">Plan</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="goal_task_stage_in_progress" model="portfolio.goal.task.stage">
+        <field name="name">In Progress</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="goal_task_stage_done" model="portfolio.goal.task.stage">
+        <field name="name">Done</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- Entry States -->
+    <record id="entry_state_green" model="portfolio.entry.state">
+        <field name="name">On Track</field>
+        <field name="sequence">1</field>
+        <field name="color">10</field>
+    </record>
+    <record id="entry_state_yellow" model="portfolio.entry.state">
+        <field name="name">At Risk</field>
+        <field name="sequence">2</field>
+        <field name="color">3</field>
+    </record>
+    <record id="entry_state_red" model="portfolio.entry.state">
+        <field name="name">Off Track</field>
+        <field name="sequence">3</field>
+        <field name="color">1</field>
+    </record>
+
+    <!-- Entry Types -->
+    <record id="entry_type_solution" model="portfolio.entry.type">
+        <field name="name">Solution</field>
+        <field name="sequence">1</field>
+        <field name="hex_color">#2ecc71</field>
+    </record>
+    <record id="entry_type_product" model="portfolio.entry.type">
+        <field name="name">Product</field>
+        <field name="sequence">2</field>
+        <field name="hex_color">#3498db</field>
+    </record>
+
+    <!-- Tags -->
+    <record id="tag_digital" model="portfolio.tag">
+        <field name="name">Digital</field>
+        <field name="color">1</field>
+    </record>
+    <record id="tag_consulting" model="portfolio.tag">
+        <field name="name">Consulting</field>
+        <field name="color">2</field>
+    </record>
+
+    <!-- Technologies -->
+    <record id="tech_odoo" model="portfolio.technology">
+        <field name="name">Odoo</field>
+        <field name="color">6</field>
+    </record>
+    <record id="tech_python" model="portfolio.technology">
+        <field name="name">Python</field>
+        <field name="color">7</field>
+    </record>
+
+    <!-- Service Types -->
+    <record id="service_implementation" model="portfolio.service.type">
+        <field name="name">Implementation</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="service_support" model="portfolio.service.type">
+        <field name="name">Support</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Target Groups -->
+    <record id="target_sme" model="portfolio.target.group">
+        <field name="name">SME</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="target_enterprise" model="portfolio.target.group">
+        <field name="name">Enterprise</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Reference Channels -->
+    <record id="channel_website" model="portfolio.reference.channel">
+        <field name="name">Website</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="channel_brochure" model="portfolio.reference.channel">
+        <field name="name">Brochure</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Website Tags -->
+    <record id="website_tag_case_study" model="portfolio.website.tag">
+        <field name="name">Case Study</field>
+        <field name="color">1</field>
+    </record>
+
+    <!-- BCG Matrix entries -->
+    <record id="bcg_star" model="portfolio.bcg.matrix">
+        <field name="name">Star</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="bcg_cash_cow" model="portfolio.bcg.matrix">
+        <field name="name">Cash Cow</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Contact Types -->
+    <record id="contact_type_customer" model="portfolio.contact.type">
+        <field name="name">Customer</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="contact_type_partner" model="portfolio.contact.type">
+        <field name="name">Partner</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Account Levels -->
+    <record id="account_level_a" model="portfolio.account.level">
+        <field name="name">A</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="account_level_b" model="portfolio.account.level">
+        <field name="name">B</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Partner Levels -->
+    <record id="partner_level_premier" model="portfolio.partner.level">
+        <field name="name">Premier</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="partner_level_standard" model="portfolio.partner.level">
+        <field name="name">Standard</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Portfolio -->
+    <record id="portfolio_demo_erp" model="portfolio.portfolio">
+        <field name="name">ERP Solutions</field>
+        <field name="stage_id" ref="stage_active" />
+        <field name="entry_type_id" ref="entry_type_solution" />
+        <field name="entry_state_id" ref="entry_state_green" />
+        <field name="revenue_current">500000</field>
+        <field name="revenue_target">750000</field>
+        <field name="next_review">2026-06-30</field>
+        <field name="description">Comprehensive ERP implementation services.</field>
+        <field name="tag_ids" eval="[(4, ref('tag_digital'))]" />
+        <field name="technology_ids" eval="[(4, ref('tech_odoo'))]" />
+        <field
+            name="target_group_ids"
+            eval="[(4, ref('target_sme')), (4, ref('target_enterprise'))]"
+        />
+    </record>
+
+    <record id="portfolio_demo_cloud" model="portfolio.portfolio">
+        <field name="name">Cloud Hosting</field>
+        <field name="stage_id" ref="stage_draft" />
+        <field name="entry_type_id" ref="entry_type_product" />
+        <field name="entry_state_id" ref="entry_state_yellow" />
+        <field name="revenue_current">200000</field>
+        <field name="revenue_target">400000</field>
+        <field name="description">Managed cloud hosting and infrastructure.</field>
+        <field name="tag_ids" eval="[(4, ref('tag_consulting'))]" />
+    </record>
+
+    <!-- References -->
+    <record id="reference_demo_1" model="portfolio.reference">
+        <field name="name">Acme Corp ERP Migration</field>
+        <field name="stage_id" ref="reference_stage_ready" />
+        <field name="customer_id" ref="base.res_partner_2" />
+        <field name="project_start">2025-01-01</field>
+        <field name="project_end">2025-12-31</field>
+        <field name="project_volume">250000</field>
+        <field name="project_volume_days">1200</field>
+        <field name="success_story">Successfully migrated Acme Corp to Odoo ERP.</field>
+        <field
+            name="technology_ids"
+            eval="[(4, ref('tech_odoo')), (4, ref('tech_python'))]"
+        />
+        <field name="service_type_ids" eval="[(4, ref('service_implementation'))]" />
+        <field name="portfolio_solution_ids" eval="[(4, ref('portfolio_demo_erp'))]" />
+        <field name="usage_type">generalUse</field>
+    </record>
+
+    <record id="reference_demo_2" model="portfolio.reference">
+        <field name="name">Global Industries Cloud Setup</field>
+        <field name="stage_id" ref="reference_stage_new" />
+        <field name="customer_id" ref="base.res_partner_3" />
+        <field name="project_start">2026-03-01</field>
+        <field name="project_end">2026-08-31</field>
+        <field name="project_volume">150000</field>
+        <field name="project_volume_days">600</field>
+        <field
+            name="success_story"
+        >Set up a scalable cloud infrastructure for Global Industries.</field>
+        <field
+            name="portfolio_solution_ids"
+            eval="[(4, ref('portfolio_demo_cloud'))]"
+        />
+        <field name="usage_type">restrictedUse</field>
+        <field name="channel_ids" eval="[(4, ref('channel_website'))]" />
     </record>
 </odoo>

@@ -14,4 +14,5 @@ git clone git@github.com:Mint-System/Odoo-Apps-Tender.git ./addons/tender
 
 | Module | Summary |
 | --- | --- |
+| [portfolio](portfolio) | Manage portfolio for tender applications. |
 | [reference](reference) | Manage references for tender applications. |

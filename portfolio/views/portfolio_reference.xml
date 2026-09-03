@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="portfolio_reference_form_view" model="ir.ui.view">
+        <field name="name">portfolio.reference_view_form</field>
+        <field name="model">portfolio.reference</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
+                </header>
+                <sheet>
+                    <field name="kanban_state" widget="state_selection" />
+                    <widget
+                        name="web_ribbon"
+                        text="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="1" />
+                    <field name="image" widget="image" class="oe_avatar" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Name..." />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="main_left">
+                            <field name="user_id" widget="many2one_avatar_user" />
+                            <field name="short_reference" />
+                        </group>
+                        <group name="main_right">
+                            <field name="customer_id" />
+                            <field name="industry_ids" widget="many2many_tags" />
+                            <field
+                                name="project_start"
+                                widget="daterange"
+                                options="{'end_date_field': 'project_end'}"
+                            />
+                            <field name="project_end" invisible="1" />
+                            <field name="tag_ids" widget="many2many_tags" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sales Reference" name="sales_reference">
+                            <group>
+                                <field name="sales_reference" />
+                                <field name="opportunity_ids" widget="many2many_tags" />
+                                <field
+                                    name="used_for_opportunity_ids"
+                                    widget="many2many_tags"
+                                />
+                            </group>
+                        </page>
+                        <page string="Project &amp; Services" name="project_services">
+                            <group>
+                                <field
+                                    name="service_type_ids"
+                                    widget="many2many_tags"
+                                />
+                                <field
+                                    name="member_ids"
+                                    widget="many2many_avatar_user"
+                                />
+                                <field name="technology_ids" widget="many2many_tags" />
+                                <field
+                                    name="portfolio_solution_ids"
+                                    widget="many2many_tags"
+                                />
+                                <field name="currency_id" />
+                                <field name="project_volume" />
+                                <field name="project_volume_days" />
+                            </group>
+                        </page>
+                        <page
+                            string="Success Story &amp; Testimonial"
+                            name="success_story"
+                        >
+                            <group>
+                                <field name="success_story" />
+                                <field name="key_aspects" />
+                                <field name="testimonial" />
+                                <field name="testimonial_by" />
+                                <field name="website_tag_ids" widget="many2many_tags" />
+                                <field name="website_url" widget="url" />
+                            </group>
+                        </page>
+                        <page string="Approval &amp; Usage" name="approval_usage">
+                            <group>
+                                <group>
+                                    <field name="customer_owner_id" />
+                                    <field name="usage_type" />
+                                    <field name="channel_ids" widget="many2many_tags" />
+                                    <field name="customer_contact_id" />
+                                </group>
+                                <group>
+                                    <field name="write_date" />
+                                    <field
+                                        name="write_uid"
+                                        widget="many2one_avatar_user"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="portfolio_reference_list_view" model="ir.ui.view">
+        <field name="name">portfolio.reference_view_list</field>
+        <field name="model">portfolio.reference</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="user_id" widget="many2one_avatar_user" />
+                <field name="customer_id" />
+                <field name="industry_ids" widget="many2many_tags" />
+                <field name="portfolio_solution_ids" widget="many2many_tags" />
+                <field name="technology_ids" widget="many2many_tags" />
+                <field name="project_start" />
+                <field name="project_end" />
+                <field name="website_url" />
+                <field name="stage_id" />
+                <field name="color" widget="color_picker" />
+            </list>
+        </field>
+    </record>
+
+    <record id="portfolio_reference_kanban_view" model="ir.ui.view">
+        <field name="name">portfolio.reference_view_kanban</field>
+        <field name="model">portfolio.reference</field>
+        <field name="arch" type="xml">
+            <kanban
+                default_group_by="stage_id"
+                default_order="is_priority desc, sequence asc, id desc"
+                highlight_color="color"
+            >
+                <field name="color" />
+                <progressbar
+                    field="kanban_state"
+                    colors='{"normal": "200", "done": "success", "blocked": "danger"}'
+                />
+                <templates>
+                    <t t-name="menu">
+                        <a
+                            t-if="widget.editable"
+                            role="menuitem"
+                            type="open"
+                            class="dropdown-item"
+                        >Edit</a>
+                        <a
+                            t-if="widget.deletable"
+                            role="menuitem"
+                            type="delete"
+                            class="dropdown-item"
+                        >Delete</a>
+                        <field widget="kanban_color_picker" name="color" />
+                    </t>
+                    <t t-name="card" class="flex-row">
+                        <main>
+                            <div name="kanban_header" class="d-flex">
+                                <field name="display_name" class="h5" />
+                            </div>
+                            <div name="kanban_body">
+                                <field name="customer_id" />
+                                <field
+                                    name="project_start"
+                                    widget="daterange"
+                                    options="{'end_date_field': 'project_end'}"
+                                />
+                            </div>
+                            <footer>
+                                <field name="project_volume" />
+                                <div class="ms-auto d-flex align-items-center">
+                                    <field
+                                        name="user_id"
+                                        widget="kanban.many2one_avatar_user"
+                                    />
+                                </div>
+                            </footer>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="portfolio_reference_search_view" model="ir.ui.view">
+        <field name="name">portfolio.reference_view_search</field>
+        <field name="model">portfolio.reference</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="name"
+                    filter_domain="['|', '|', '|', '|', ('name', 'ilike', self), ('customer_id', 'ilike', self), ('short_reference', 'ilike', self), ('sales_reference', 'ilike', self), ('success_story', 'ilike', self)]"
+                />
+                <field name="user_id" />
+                <filter
+                    string="My References"
+                    name="my_references"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="archived"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="groupby_user"
+                    string="Puzzle Owner"
+                    context="{'group_by': 'user_id'}"
+                />
+                <filter
+                    name="groupby_stage"
+                    string="Stage"
+                    context="{'group_by': 'stage_id'}"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_portfolio_reference_view" model="ir.actions.act_window">
+        <field name="name">References &amp; Success Stories</field>
+        <field name="res_model">portfolio.reference</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="search_view_id" ref="portfolio_reference_search_view" />
+    </record>
+</odoo>

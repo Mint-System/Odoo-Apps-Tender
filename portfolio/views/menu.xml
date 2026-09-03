@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Portfolio App -->
+    <menuitem
+        id="menu_portfolio_root"
+        name="Portfolio"
+        web_icon="fa fa-th-list,#2ecc71,#FFFFFF"
+        groups="base.group_user"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_portfolio_kanban"
+        name="Kanban-View"
+        parent="menu_portfolio_root"
+        action="action_portfolio_portfolio_view"
+        sequence="1"
+    />
+    <menuitem
+        id="menu_portfolio_configuration"
+        name="Configuration"
+        parent="menu_portfolio_root"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_portfolio_target_groups"
+        name="Target Groups"
+        parent="menu_portfolio_configuration"
+        action="action_portfolio_target_group_view"
+        sequence="1"
+    />
+    <menuitem
+        id="menu_portfolio_technologies"
+        name="Technologies, Tools &amp; Methods"
+        parent="menu_portfolio_configuration"
+        action="action_portfolio_technology_view"
+        sequence="2"
+    />
+    <menuitem
+        id="menu_portfolio_industries"
+        name="Industries"
+        parent="menu_portfolio_configuration"
+        action="base.res_partner_industry_action"
+        sequence="3"
+    />
+    <menuitem
+        id="menu_portfolio_bcg_matrix"
+        name="Boston Consulting Group Matrix"
+        parent="menu_portfolio_configuration"
+        action="action_portfolio_bcg_matrix_view"
+        sequence="4"
+    />
+    <menuitem
+        id="menu_portfolio_stages"
+        name="Portfolio Stages"
+        parent="menu_portfolio_configuration"
+        action="action_portfolio_stage_view"
+        sequence="5"
+    />
+    <menuitem
+        id="menu_portfolio_entry_types"
+        name="Portfolio Entry Types"
+        parent="menu_portfolio_configuration"
+        action="action_portfolio_entry_type_view"
+        sequence="6"
+    />
+    <menuitem
+        id="menu_portfolio_entry_states"
+        name="Portfolio Entry States"
+        parent="menu_portfolio_configuration"
+        action="action_portfolio_entry_state_view"
+        sequence="7"
+    />
+
+    <!-- References App -->
+    <menuitem
+        id="menu_references_root"
+        name="References"
+        web_icon="fa fa-newspaper-o,#0079BF,#FFFFFF"
+        groups="base.group_user"
+        sequence="11"
+    />
+    <menuitem
+        id="menu_references_list"
+        name="References &amp; Success Stories"
+        parent="menu_references_root"
+        action="action_portfolio_reference_view"
+        sequence="1"
+    />
+    <menuitem
+        id="menu_references_website_tags"
+        name="Website Tags"
+        parent="menu_references_root"
+        action="action_portfolio_website_tag_view"
+        sequence="5"
+    />
+    <menuitem
+        id="menu_references_configuration"
+        name="Configuration"
+        parent="menu_references_root"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_references_industries"
+        name="Industries"
+        parent="menu_references_configuration"
+        action="base.res_partner_industry_action"
+        sequence="1"
+    />
+    <menuitem
+        id="menu_references_service_types"
+        name="Service Types"
+        parent="menu_references_configuration"
+        action="action_portfolio_service_type_view"
+        sequence="2"
+    />
+    <menuitem
+        id="menu_references_technologies"
+        name="Technologies, Tools &amp; Methodologies"
+        parent="menu_references_configuration"
+        action="action_portfolio_technology_view"
+        sequence="3"
+    />
+    <menuitem
+        id="menu_references_tags"
+        name="Tags"
+        parent="menu_references_configuration"
+        action="action_portfolio_reference_tag_view"
+        sequence="4"
+    />
+    <menuitem
+        id="menu_references_website_tags_config"
+        name="Website Tags"
+        parent="menu_references_configuration"
+        action="action_portfolio_website_tag_view"
+        sequence="5"
+    />
+    <menuitem
+        id="menu_references_channels"
+        name="Channels"
+        parent="menu_references_configuration"
+        action="action_portfolio_reference_channel_view"
+        sequence="6"
+    />
+    <menuitem
+        id="menu_references_stages"
+        name="Stages"
+        parent="menu_references_configuration"
+        action="action_portfolio_reference_stage_view"
+        sequence="7"
+    />
+
+    <!-- Contacts Configuration -->
+    <menuitem
+        id="menu_contacts_target_groups"
+        name="Target Groups"
+        parent="contacts.res_partner_menu_config"
+        action="action_portfolio_target_group_view"
+        sequence="7"
+    />
+    <menuitem
+        id="menu_contacts_contact_type"
+        name="Contact Type"
+        parent="contacts.res_partner_menu_config"
+        action="action_portfolio_contact_type_view"
+        sequence="8"
+    />
+    <menuitem
+        id="menu_contacts_account_level"
+        name="Account Level"
+        parent="contacts.res_partner_menu_config"
+        action="action_portfolio_account_level_view"
+        sequence="9"
+    />
+    <menuitem
+        id="menu_contacts_partner_level"
+        name="Partner Level"
+        parent="contacts.res_partner_menu_config"
+        action="action_portfolio_partner_level_view"
+        sequence="10"
+    />
+</odoo>

@@ -1,85 +1,242 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="portfolio_portfolio_form_view" model="ir.ui.view">
-        <field name="name">portfolio.portfolio_portfolio_form_view</field>
+        <field name="name">portfolio.portfolio_view_form</field>
         <field name="model">portfolio.portfolio</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" select="1" readonly="1" />
-                    <!-- <button name="button_confirm" string="Confirm" type="object" /> -->
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box" />
+                    <field name="kanban_state" widget="state_selection" />
+                    <widget
+                        name="web_ribbon"
+                        text="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="1" />
+                    <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_title">
                         <h1>
-                            <field name="name" />
+                            <field name="name" required="1" placeholder="Name..." />
                         </h1>
                     </div>
+                    <group name="main">
+                        <group name="main_left">
+                            <field name="entry_type_id" />
+                            <field name="entry_state_id" />
+                            <field name="entry_state_color" widget="color_picker" />
+                            <field name="type_hex_color" invisible="1" />
+                            <field name="revenue_current" />
+                            <field name="revenue_target" />
+                            <field name="profit_margin" />
+                            <field name="next_review" />
+                            <field name="next_milestone" />
+                        </group>
+                        <group name="main_right">
+                            <field name="user_id" widget="many2one_avatar_user" />
+                            <field
+                                name="lead_deputy_id"
+                                widget="many2one_avatar_user"
+                            />
+                            <field name="description" />
+                            <field name="knowledge_article_id" />
+                            <field
+                                name="product_partner_manager_id"
+                                widget="many2one_avatar_user"
+                            />
+                        </group>
+                    </group>
+                    <group>
+                        <field
+                            name="notes"
+                            placeholder="Type down your notes here..."
+                            nolabel="1"
+                            colspan="2"
+                        />
+                    </group>
                     <notebook>
-                        <page string="General Information" name="general_info">
-                            <group>
-                                <group>
-                                    <field name="value" />
+                        <page
+                            string="Target Groups &amp; Segments"
+                            name="target_groups"
+                        >
+                            <group name="target_groups_group">
+                                <group name="target_groups_left">
+                                    <field
+                                        name="target_group_ids"
+                                        widget="many2many_tags"
+                                    />
+                                </group>
+                                <group name="target_groups_right">
+                                    <field
+                                        name="target_industry_ids"
+                                        widget="many2many_tags"
+                                    />
                                 </group>
                             </group>
                         </page>
+                        <page string="Solution" name="solution">
+                            <group name="solution_group">
+                                <group name="solution_left">
+                                    <field
+                                        name="technology_ids"
+                                        widget="many2many_tags"
+                                    />
+                                    <field name="tag_ids" widget="many2many_tags" />
+                                    <field
+                                        name="division_ids"
+                                        widget="many2many_tags"
+                                    />
+                                </group>
+                                <group name="solution_right">
+                                    <field name="bcg_matrix_id" />
+                                    <field name="bcg_matrix_goal_id" />
+                                    <field name="bcg_matrix_today_id" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Goals &amp; Key Tasks" name="goals_tasks">
+                            <field name="goal_ids" />
+                            <field name="key_task_ids" />
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description_long" />
+                            <field name="content" />
+                            <field name="links" />
+                        </page>
                     </notebook>
                 </sheet>
+                <chatter />
             </form>
         </field>
     </record>
 
     <record id="portfolio_portfolio_list_view" model="ir.ui.view">
-        <field name="name">portfolio.portfolio_portfolio_list_view</field>
+        <field name="name">portfolio.portfolio_view_list</field>
         <field name="model">portfolio.portfolio</field>
         <field name="arch" type="xml">
-            <list>
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
                 <field name="name" />
-                <field name="value" />
+                <field name="user_id" widget="many2one_avatar_user" />
+                <field name="stage_id" />
+                <field name="kanban_state" />
+                <field name="color" widget="color_picker" />
             </list>
         </field>
     </record>
 
+    <record id="portfolio_portfolio_kanban_view" model="ir.ui.view">
+        <field name="name">portfolio.portfolio_view_kanban</field>
+        <field name="model">portfolio.portfolio</field>
+        <field name="arch" type="xml">
+            <kanban
+                default_group_by="stage_id"
+                default_order="is_priority desc, sequence asc, id desc"
+                highlight_color="color"
+            >
+                <field name="color" />
+                <progressbar
+                    field="kanban_state"
+                    colors='{"draft": "200", "done": "success", "blocked": "danger"}'
+                />
+                <templates>
+                    <t t-name="menu">
+                        <a
+                            t-if="widget.editable"
+                            role="menuitem"
+                            type="open"
+                            class="dropdown-item"
+                        >Edit</a>
+                        <a
+                            t-if="widget.deletable"
+                            role="menuitem"
+                            type="delete"
+                            class="dropdown-item"
+                        >Delete</a>
+                        <field widget="kanban_color_picker" name="color" />
+                    </t>
+                    <t t-name="card" class="flex-row">
+                        <aside>
+                            <field
+                                name="image"
+                                widget="image"
+                                options="{&quot;zoom&quot;: true, &quot;background&quot;: true, &quot;preventClicks&quot;: false}"
+                            />
+                        </aside>
+                        <main>
+                            <div name="kanban_header" class="d-flex">
+                                <field
+                                    name="is_priority"
+                                    widget="boolean_favorite"
+                                    nolabel="1"
+                                />
+                                <field name="display_name" class="h5" />
+                            </div>
+                            <div name="kanban_body" />
+                            <footer>
+                                <div class="ms-auto d-flex align-items-center">
+                                    <field
+                                        name="kanban_state"
+                                        widget="state_selection"
+                                    />
+                                    <field
+                                        class="ms-1"
+                                        name="user_id"
+                                        widget="kanban.many2one_avatar_user"
+                                    />
+                                </div>
+                            </footer>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="portfolio_portfolio_search_view" model="ir.ui.view">
-        <field name="name">portfolio.portfolio_portfolio_search_view</field>
+        <field name="name">portfolio.portfolio_view_search</field>
         <field name="model">portfolio.portfolio</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
-                <field name="value" />
+                <field name="user_id" />
+                <filter
+                    string="My Portfolio"
+                    name="my_portfolio"
+                    domain="[('user_id', '=', uid)]"
+                />
                 <separator />
                 <filter
                     string="Archived"
-                    name="inactive"
+                    name="archived"
                     domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="groupby_user"
+                    string="Owner"
+                    context="{'group_by': 'user_id'}"
+                />
+                <filter
+                    name="groupby_stage"
+                    string="Stage"
+                    context="{'group_by': 'stage_id'}"
                 />
             </search>
         </field>
     </record>
 
     <record id="action_portfolio_portfolio_view" model="ir.actions.act_window">
-        <field name="name">Portfolios</field>
+        <field name="name">Portfolio</field>
         <field name="res_model">portfolio.portfolio</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="portfolio_portfolio_search_view" />
     </record>
-
-    <menuitem
-        id="portfolio.menu_root"
-        name="Documents"
-        web_icon="portfolio,static/description/icon.png"
-    />
-    <menuitem
-        id="portfolio.menu_document"
-        name="Documents"
-        parent="portfolio.menu_root"
-    />
-    <menuitem
-        id="portfolio.menu_portfolio_portfolio"
-        name="Portfolios"
-        parent="portfolio.menu_document"
-        action="portfolio.action_portfolio_portfolio_view"
-        sequence="10"
-    />
 </odoo>

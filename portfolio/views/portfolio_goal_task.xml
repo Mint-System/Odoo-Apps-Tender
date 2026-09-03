@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="portfolio_goal_task_form_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_form</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
+                </header>
+                <sheet>
+                    <field name="kanban_state" widget="state_selection" />
+                    <widget
+                        name="web_ribbon"
+                        text="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="1" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Name..." />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="main_left">
+                            <field name="portfolio_id" />
+                            <field
+                                name="start_date"
+                                widget="daterange"
+                                options="{'end_date_field': 'due_date'}"
+                            />
+                            <field name="due_date" invisible="1" />
+                            <field name="task_type" />
+                            <field name="indicator" />
+                        </group>
+                        <group name="main_right">
+                            <field name="user_id" widget="many2one_avatar_user" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="value" />
+                            <field name="tag_ids" widget="many2many_tags" />
+                            <field name="color" widget="color_picker" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" />
+                        <field
+                            name="commit_text"
+                            invisible="indicator in ['Revenue', 'FTE', 'Customers'] or task_type in ['task']"
+                        />
+                        <field
+                            name="target_text"
+                            invisible="indicator in ['Revenue', 'FTE', 'Customers'] or task_type in ['task']"
+                        />
+                        <field
+                            name="commit_num"
+                            invisible="indicator in ['Qualitative', 'Other'] or not indicator"
+                        />
+                        <field
+                            name="target_num"
+                            invisible="indicator in ['Qualitative', 'Other'] or not indicator"
+                        />
+                        <field name="closing_comment" />
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="portfolio_goal_task_list_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_list</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="portfolio_id" />
+                <field name="user_id" widget="many2one_avatar_user" />
+                <field name="stage_id" />
+                <field name="task_type" />
+                <field name="value" />
+                <field name="tag_ids" widget="many2many_tags" />
+                <field name="color" widget="color_picker" />
+            </list>
+        </field>
+    </record>
+
+    <record id="portfolio_goal_task_kanban_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_kanban</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <kanban
+                default_group_by="stage_id"
+                default_order="is_priority desc, sequence asc, id desc"
+                highlight_color="color"
+            >
+                <field name="color" />
+                <field name="currency_id" />
+                <progressbar
+                    field="kanban_state"
+                    colors='{"normal": "200", "done": "success", "blocked": "danger"}'
+                    sum_field="value"
+                />
+                <templates>
+                    <t t-name="menu">
+                        <a
+                            t-if="widget.editable"
+                            role="menuitem"
+                            type="open"
+                            class="dropdown-item"
+                        >Edit</a>
+                        <a
+                            t-if="widget.deletable"
+                            role="menuitem"
+                            type="delete"
+                            class="dropdown-item"
+                        >Delete</a>
+                        <field widget="kanban_color_picker" name="color" />
+                    </t>
+                    <t t-name="card" class="flex-row">
+                        <main>
+                            <div name="kanban_header" class="d-flex">
+                                <field
+                                    name="is_priority"
+                                    widget="boolean_favorite"
+                                    nolabel="1"
+                                />
+                                <field name="display_name" class="h5" />
+                            </div>
+                            <div name="kanban_body">
+                                <field
+                                    name="tag_ids"
+                                    options="{'color_field': 'color'}"
+                                />
+                            </div>
+                            <footer>
+                                <field name="value" />
+                                <div class="ms-auto d-flex align-items-center">
+                                    <field
+                                        name="kanban_state"
+                                        widget="state_selection"
+                                    />
+                                    <field
+                                        class="ms-1"
+                                        name="user_id"
+                                        widget="kanban.many2one_avatar_user"
+                                    />
+                                </div>
+                            </footer>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="portfolio_goal_task_gantt_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_gantt</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <gantt
+                date_start="start_date"
+                date_stop="due_date"
+                default_group_by="portfolio_id"
+                default_scale="year"
+                display_mode="dense"
+            />
+        </field>
+    </record>
+
+    <record id="portfolio_goal_task_pivot_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_pivot</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <pivot sample="1">
+                <field name="value" type="measure" />
+                <field name="stage_id" type="col" />
+            </pivot>
+        </field>
+    </record>
+
+    <record id="portfolio_goal_task_graph_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_graph</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <graph sample="1">
+                <field name="value" type="measure" />
+                <field name="create_date" type="row" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="portfolio_goal_task_search_view" model="ir.ui.view">
+        <field name="name">portfolio.goal.task_view_search</field>
+        <field name="model">portfolio.goal.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="user_id" />
+                <field name="tag_ids" />
+                <filter
+                    string="My Goals &amp; Key Tasks"
+                    name="my_goals"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <separator />
+                <filter
+                    string="Goals"
+                    name="goals"
+                    domain="[('task_type', '=', 'goal')]"
+                />
+                <filter
+                    string="Key Tasks"
+                    name="key_tasks"
+                    domain="[('task_type', '=', 'task')]"
+                />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="archived"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="groupby_portfolio"
+                    string="Solution"
+                    context="{'group_by': 'portfolio_id'}"
+                />
+                <filter
+                    name="groupby_stage"
+                    string="Stage"
+                    context="{'group_by': 'stage_id'}"
+                />
+                <filter
+                    name="groupby_type"
+                    string="Type"
+                    context="{'group_by': 'task_type'}"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_portfolio_goal_task_view" model="ir.actions.act_window">
+        <field name="name">Goals &amp; Key Tasks</field>
+        <field name="res_model">portfolio.goal.task</field>
+        <field name="view_mode">list,kanban,form,gantt,pivot</field>
+        <field name="search_view_id" ref="portfolio_goal_task_search_view" />
+    </record>
+</odoo>
