@@ -91,7 +91,7 @@ class ReferenceReference(models.Model):
     )
 
     # Publishing / Website
-    website_url = fields.Char(help="Published website URL", widget="url")
+    website_url = fields.Char(help="Published website URL")
     website_tag_ids = fields.Many2many(
         "reference.website.tag",
         string="Website Tags",

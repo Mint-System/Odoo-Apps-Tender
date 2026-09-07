@@ -13,7 +13,7 @@
                     />
                 </header>
                 <sheet>
-                    <field name="kanban_state" widget="state_selection" />
+                    <field name="kanban_state" invisible="1" />
                     <widget
                         name="web_ribbon"
                         text="Archived"
@@ -21,7 +21,13 @@
                         invisible="active"
                     />
                     <field name="active" invisible="1" />
-                    <field name="image" widget="image" class="oe_avatar" />
+                    <field
+                        name="image"
+                        widget="image"
+                        class="oe_avatar"
+                        invisible="1"
+                        options="{'size': [0, 90]}"
+                    />
                     <div class="oe_title">
                         <h1>
                             <field name="name" required="1" placeholder="Name..." />
@@ -44,12 +50,17 @@
                             <field
                                 name="lead_deputy_id"
                                 widget="many2one_avatar_user"
+                                invisible="entry_type_id in [2]"
                             />
                             <field name="description" />
-                            <field name="knowledge_article_id" />
+                            <field
+                                name="knowledge_article_id"
+                                invisible="entry_type_id not in [1, 2]"
+                            />
                             <field
                                 name="product_partner_manager_id"
                                 widget="many2one_avatar_user"
+                                invisible="entry_type_id in [1]"
                             />
                         </group>
                     </group>
@@ -81,7 +92,11 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Solution" name="solution">
+                        <page
+                            string="Solution"
+                            name="solution"
+                            invisible="entry_type_id in [2]"
+                        >
                             <group name="solution_group">
                                 <group name="solution_left">
                                     <field

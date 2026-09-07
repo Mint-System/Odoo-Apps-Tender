@@ -17,6 +17,6 @@ class ReferenceTargetGroup(models.Model):
     sequence = fields.Integer()
     color = fields.Integer()
     category_id = fields.Many2one("reference.target.group", string="Category")
-    display_color = fields.Integer(widget="color_picker")
+    display_color = fields.Integer()
     image = fields.Image()
     notes = fields.Html()
