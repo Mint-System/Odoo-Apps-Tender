@@ -5,7 +5,7 @@
         id="menu_portfolio_root"
         name="Portfolio"
         web_icon="fa fa-th-list,#2ecc71,#FFFFFF"
-        groups="base.group_user"
+        groups="portfolio.group_user,portfolio.group_manager"
         sequence="10"
     />
     <menuitem
@@ -68,84 +68,6 @@
         name="Portfolio Entry States"
         parent="menu_portfolio_configuration"
         action="action_portfolio_entry_state_view"
-        sequence="7"
-    />
-
-    <!-- References App -->
-    <menuitem
-        id="menu_references_root"
-        name="References"
-        web_icon="fa fa-newspaper-o,#0079BF,#FFFFFF"
-        groups="base.group_user"
-        sequence="11"
-    />
-    <menuitem
-        id="menu_references_list"
-        name="References &amp; Success Stories"
-        parent="menu_references_root"
-        action="action_portfolio_reference_view"
-        sequence="1"
-    />
-    <menuitem
-        id="menu_references_website_tags"
-        name="Website Tags"
-        parent="menu_references_root"
-        action="action_portfolio_website_tag_view"
-        sequence="5"
-    />
-    <menuitem
-        id="menu_references_configuration"
-        name="Configuration"
-        parent="menu_references_root"
-        sequence="10"
-    />
-    <menuitem
-        id="menu_references_industries"
-        name="Industries"
-        parent="menu_references_configuration"
-        action="base.res_partner_industry_action"
-        sequence="1"
-    />
-    <menuitem
-        id="menu_references_service_types"
-        name="Service Types"
-        parent="menu_references_configuration"
-        action="action_portfolio_service_type_view"
-        sequence="2"
-    />
-    <menuitem
-        id="menu_references_technologies"
-        name="Technologies, Tools &amp; Methodologies"
-        parent="menu_references_configuration"
-        action="action_portfolio_technology_view"
-        sequence="3"
-    />
-    <menuitem
-        id="menu_references_tags"
-        name="Tags"
-        parent="menu_references_configuration"
-        action="action_portfolio_reference_tag_view"
-        sequence="4"
-    />
-    <menuitem
-        id="menu_references_website_tags_config"
-        name="Website Tags"
-        parent="menu_references_configuration"
-        action="action_portfolio_website_tag_view"
-        sequence="5"
-    />
-    <menuitem
-        id="menu_references_channels"
-        name="Channels"
-        parent="menu_references_configuration"
-        action="action_portfolio_reference_channel_view"
-        sequence="6"
-    />
-    <menuitem
-        id="menu_references_stages"
-        name="Stages"
-        parent="menu_references_configuration"
-        action="action_portfolio_reference_stage_view"
         sequence="7"
     />
 
