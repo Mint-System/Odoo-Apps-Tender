@@ -1,7 +1,7 @@
 ---
 commit_ref: 77813b01475f6e31d77ea9f5eb261e5dd49a81e9
 title: "Refactor Odoo studio data to module views"
-state: ready
+state: cancelled
 ---
 
 # Run 02
