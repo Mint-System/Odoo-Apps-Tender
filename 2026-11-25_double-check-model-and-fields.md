@@ -35,6 +35,16 @@ The models for portfolio are `portfolio/models` and for reference `reference/mod
 
 Note that the studio customisations contain both. Report any discrepancies.
 
+### Issue install
+
+When I tried to isntall the module on another Odoo enviroment I got this error:
+
+```
+ParseError('while parsing %s:%s, somewhere inside\n%s' % ( odoo.tools.convert.ParseError: while parsing /var/lib/odoo/git/github.com/Mint-System/Odoo-Apps-Tender/reference/demo/demo.xml:28, somewhere inside <record id="demo_user_puzzle_member" model="res.users" context="{'no_reset_password': True}"> <field name="name">Puzzle Member (Demo)</field> <field name="login">odoo+demo@puzzle.ch</field> <field name="email">odoo+demo@puzzle.ch</field> <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/> </record> 
+```
+
+Demo data is not enabled. Why is trying to load demo data? Is there a real issue with demo data?
+
 ### Report remove customisations
 
 Then I would like to know how I can remove the customisation once I have installed the modules and moved data.
